@@ -1,0 +1,50 @@
+# Function to perform encryption using Caesar cipher
+def encrypt(text, shift):
+    result = ""
+    for char in text:
+        if char.isalpha():  # Check if it's an alphabetic character
+            # Preserve case while encrypting
+            if char.isupper():
+                result += chr((ord(char) - ord('A') + shift) % 26 + ord('A'))
+            else:
+                result += chr((ord(char) - ord('a') + shift) % 26 + ord('a'))
+        else:
+            result += char  # Non-alphabetic characters remain unchanged
+    return result
+
+# Function to perform decryption using Caesar cipher
+def decrypt(text, shift):
+    result = ""
+    for char in text:
+        if char.isalpha():  # Check if it's an alphabetic character
+            # Preserve case while decrypting
+            if char.isupper():
+                result += chr((ord(char) - ord('A') - shift + 26) % 26 + ord('A'))
+            else:
+                result += chr((ord(char) - ord('a') - shift + 26) % 26 + ord('a'))
+        else:
+            result += char  # Non-alphabetic characters remain unchanged
+    return result
+
+def main():
+    option = 'Y'
+    while option.upper() == 'Y':
+        # Prompt the user to choose encryption or decryption
+        user_choice = input("Press 'E' to encrypt and 'D' to decrypt: ")
+        input_text = input("Enter text: ")
+        shift = int(input("Enter shift: "))
+
+        # Switch statement to perform encryption or decryption based on user input
+        if user_choice.upper() == 'E':
+            print("Encrypted text:")
+            print(encrypt(input_text, shift))
+        elif user_choice.upper() == 'D':
+            print("Decrypted text:")
+            print(decrypt(input_text, shift))
+        else:
+            print("Invalid input")
+
+        option = input("Do you want to continue? (Press 'Y' for yes, 'N' for no): ")
+
+if __name__ == "__main__":
+    main()
